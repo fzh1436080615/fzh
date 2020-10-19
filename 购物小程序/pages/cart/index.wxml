@@ -1,0 +1,75 @@
+<!-- 收货地址 -->
+<view class="revice_address_row">
+    <view class="address_btn" wx:if="{{!address.userName}}">
+        <button bindtap="handleChooseAddress" type="primary" plain="{{true}}">获取收获地址</button>
+    </view>
+    <!--  -->
+    <view wx:else class="user_info_row">
+        <view class="user_info">
+            <view>{{address.userName}}</view>
+            <view>{{address.provinceName+address.cityName+address.countyName+address.detailInfo}}</view>
+        </view>
+       <view class="user_phon">{{address.telNumber}}</view>
+    </view>
+</view>
+
+<!-- 购物车内容 -->
+<view class="cart_content">
+    <view class="cart_title">购物车</view>
+    <view class="cart_main">
+        <!-- 购物车显示 -->
+        <block wx:if="{{cart.length!==0}}">
+            <view class="cart_item"
+            wx:for="{{cart}}"
+            wx:key="goods_id"
+            >
+                <!-- 复选框 -->
+                <view class="cart_chk_wrap">
+                    <checkbox-group data-id="{{item.data.message.goods_id}}" bindchange="handItemChange">
+                        <checkbox checked="{{item.checked}}"></checkbox>
+                    </checkbox-group>
+                </view>
+                <!-- 图片 -->
+                <navigator class="cart_img_wrap">
+                    <image mode="widthFix" src="{{item.data.message.goods_small_logo}}"></image>
+                </navigator>
+                <!-- 信息 -->
+                <view class="cart_info_wrap">
+                    <view class="goods_name">{{item.data.message.goods_name}}</view>
+                    <view class="goods_price_wrap">
+                        <view class="goods_price">￥{{item.data.message.goods_price}}</view>
+                        <view class="cart_num_tool">
+                            <view bindtap="handLeItemNumEdit" data-id="{{item.data.message.goods_id}}" data-operation="{{-1}}" class="num_edit">-</view>
+                            <view class="goods_num">{{item.num}}</view>
+                            <view bindtap="handLeItemNumEdit" data-id="{{item.data.message.goods_id}}" data-operation="{{1}}" class="num_edit">+</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:else>
+            <image mode="widthFix" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602261194041&di=716c0cb5c54f4412ea980b8390861ec8&imgtype=0&src=http%3A%2F%2Fhbimg.huabanimg.com%2Fa4064bdab5f6c800ed664014f3eb7d13a4dd25b3138d0-hYHe07_fw236"></image>
+        </block>
+    </view>
+</view>
+
+<!-- 底部 -->
+<view class="footer_tool">
+    <!-- 全选 -->
+    <view class="all_chk_wrap">
+        <checkbox-group bindchange="handleItemAllChenck">
+            <checkbox checked="{{allChecked}}">全选</checkbox>
+        </checkbox-group>
+    </view>
+    <!-- 价格 -->
+    <view class="total_price_wrap">
+        <view class="total_price">
+            合计：<text class="total_price_text">￥{{totalPrice}}</text>
+        </view>
+        <view>包含运费</view>
+    </view>
+    <!-- 结算 -->
+    <view class="order_pay_wrap" bindtap="handlePay">
+        结算({{totalNum}})
+    </view>
+</view>

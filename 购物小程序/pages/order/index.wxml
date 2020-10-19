@@ -1,0 +1,8 @@
+<!--pages/order/index.wxml-->
+<view>
+    <tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange" class="tabs_wrap">
+        <view class="image_wrap">
+            <image src="../../styles/image/nodata.jpg" mode="widthFix"></image>
+        </view>
+    </tabs>
+</view>
